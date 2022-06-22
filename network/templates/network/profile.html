@@ -1,0 +1,38 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<div id="profile-view">
+    <br>
+    <p></p>
+    <div id="profile-header-container" class="d-flex align-items-center">
+        <button id="profile-photo" type="button" class="btn btn-border-black mr-3">
+            <i class="bi-person-bounding-box"></i>
+        </button>
+        <div id="profile-details-container" class="d-flex flex-column">
+            <div id="profile-user-following" class="d-flex align-items-center">
+                <h4 id="profile-username" style="font-weight: bold;" class="mt-1 mr-3">{{ profile_user.username }}</h4>
+                <h4 id="profile-id" hidden>{{ profile_user.id }}</h4>
+                {% if request.user.id != profile_user.id %}
+                    <button id="profile-unfollow" type="button" class="un-follow btn btn-outline-danger btn-sm">Unfollow</button>
+                    <button id="profile-follow" type="button" class="un-follow btn btn-outline-primary btn-sm">Follow</button>
+                {% endif %}
+            </div>
+
+            <div id="profile-following-followers" class="d-flex mt-2">
+                <p class="ml-1 mr-4" style="white-space: nowrap"><strong id="profile-following">{{ profile_user.following }}</strong> Following</p>
+                <p class="ml-4" style="white-space: nowrap"><strong id="profile-followers">{{ profile_user.followers }}</strong> Followers</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <hr>
+  </div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'network/profile.js' %}"></script>
+<script src="{% static 'network/posts.js' %}"></script>
+{% endblock %}
